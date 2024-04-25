@@ -8,6 +8,9 @@
                 <h5>Register</h5>
             </div>
             <div class="card-body">
+
+                @include('shared._errors')
+
                 <form method="post" action="{{ route('users.store') }}">
                     @csrf
                     <div class="mb-3">
