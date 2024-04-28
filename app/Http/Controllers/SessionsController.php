@@ -9,6 +9,9 @@ class SessionsController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('guest',[
+           'only' => ['create']
+        ]);
     }
 
     public function create()
@@ -29,7 +32,9 @@ class SessionsController extends Controller
         if(Auth::attempt($credentials, $request->has('remember'))){
 
             session()->flash('success', 'Welcome back '. Auth::user()->name . ' !');
-            return redirect()->route('users.show', [Auth::user()]);
+            $fallback = route('users.show', Auth::user());
+            return redirect()->intended($fallback);
+            //return redirect()->route('users.show', [Auth::user()]);
         }else{
             session()->flash('danger', 'Sorry, you email or password is not right');
             return redirect()->back()->withInput();
