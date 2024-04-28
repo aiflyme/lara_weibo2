@@ -27,6 +27,7 @@ class SessionsController extends Controller
 //        $credentials = $request->only('email', 'password');
         //if(Auth::attempt(['email'=>$email, 'password'=>$password])){
         if(Auth::attempt($credentials)){
+
             session()->flash('success', 'Welcome back '. Auth::user()->name . ' !');
             return redirect()->route('users.show', [Auth::user()]);
         }else{
