@@ -19,6 +19,11 @@ class UsersController extends Controller
         $this->middleware('guest', [
             'only' => ['create']
         ]);
+
+        //visit limit
+        $this->middleware('throttle:10,60',[
+            'only' => ['store'],
+        ]);
     }
 
     public function index()
