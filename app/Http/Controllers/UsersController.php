@@ -20,7 +20,7 @@ class UsersController extends Controller
             'only' => ['create']
         ]);
 
-        //visit limit
+        //Access limit
         $this->middleware('throttle:10,60',[
             'only' => ['store'],
         ]);

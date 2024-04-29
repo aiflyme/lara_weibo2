@@ -14,6 +14,7 @@ class PasswordController extends Controller
 {
     public function __construct()
     {
+        //Access limit  2 times 1 minute
         $this->middleware('throttle:2,1',[
            'only' => ['showLinkRequestForm']
         ]);
