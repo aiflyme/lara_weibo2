@@ -26,6 +26,7 @@ Route::get('/about', [StaticPagesController::class, 'about'])->name('about');
 
 Route::get('signup', [UsersController::class,'create'])->name('signup');
 
+Route::get('signup/confirm/{token}',[UsersController::class,'confirmEmail'])->name('confirm_email');
 Route::resource('users',UsersController::class);
 
 //Session
