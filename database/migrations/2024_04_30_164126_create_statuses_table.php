@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->text('context');
+            $table->text('content');
             $table->integer('user_id')->index();
             $table->index('created_at');
             $table->timestamps();
