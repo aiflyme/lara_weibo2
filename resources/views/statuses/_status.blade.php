@@ -6,4 +6,11 @@
         <h5 class="mt-0 mt-1">{{ $user->name }} <small> / {{$status->created_at->diffForHumans()}}</small></h5>
         {{$status->content}}
     </div>
+    @can('destroy', $user)
+        <form action="{{ route('status.destroy', $user->id) }}" method="post" class="float-end">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger delete-btn">Delete</button>
+        </form>
+    @endcan
 </li>

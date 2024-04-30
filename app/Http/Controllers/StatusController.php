@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Status;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        echo 'index';
     }
 
     /**
@@ -20,7 +27,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('statuses.create');
     }
 
     /**
@@ -28,7 +35,16 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'content' => 'required|max:140',
+        ]);
+
+        $status = Auth::user()->statuses()->create([
+            'content' => $request->content,
+        ]);
+
+        session()->flash('success', 'You post the new weibo!');
+        return redirect()->back();
     }
 
     /**
@@ -36,7 +52,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        //
+        echo 'show';
     }
 
     /**
@@ -60,6 +76,10 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        //
+        $this->authorize('destroy',$status);
+        $status->delete();
+
+        session()->flash('success', 'delete the weibo success');
+        return redirect(back());
     }
 }
