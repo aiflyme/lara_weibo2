@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Status;
 use App\Models\User;
 
 class StatusPolicy
@@ -14,8 +15,8 @@ class StatusPolicy
         //
     }
 
-    public function destroy(User $currentUser, User $user)
+    public function destroy(User $currentUser, Status $status)
     {
-        return $currentUser->is_admin && $currentUser->id !== $user->id;
+        return $status->user_id === $currentUser->id;
     }
 }

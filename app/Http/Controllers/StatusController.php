@@ -80,6 +80,6 @@ class StatusController extends Controller
         $status->delete();
 
         session()->flash('success', 'delete the weibo success');
-        return redirect(back());
+        return redirect()->back();
     }
 }
