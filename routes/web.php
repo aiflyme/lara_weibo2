@@ -28,6 +28,10 @@ Route::get('/about', [StaticPagesController::class, 'about'])->name('about');
 
 Route::get('signup', [UsersController::class,'create'])->name('signup');
 
+//follower and following
+Route::get('users/{user}/followings',[UsersController::class,'followings'])->name('users.followings');
+Route::get('users/{user}/followers',[UsersController::class,'followers'])->name('users.followers');
+
 Route::get('signup/confirm/{token}',[UsersController::class,'confirmEmail'])->name('confirm_email');
 Route::resource('users',UsersController::class);
 
