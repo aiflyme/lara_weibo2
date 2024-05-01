@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StaticPagesController;
@@ -31,6 +32,8 @@ Route::get('signup', [UsersController::class,'create'])->name('signup');
 //follower and following
 Route::get('users/{user}/followings',[UsersController::class,'followings'])->name('users.followings');
 Route::get('users/{user}/followers',[UsersController::class,'followers'])->name('users.followers');
+Route::post('users/followers/{user}',[FollowersController::class,'store'])->name('followers.store');
+Route::delete('users/followers/{user}',[FollowersController::class,'destroy'])->name('followers.destroy');
 
 Route::get('signup/confirm/{token}',[UsersController::class,'confirmEmail'])->name('confirm_email');
 Route::resource('users',UsersController::class);
